@@ -50,6 +50,14 @@ jobs:
           pip install build setuptools wheel
           python -m build --wheel
 
+      - name: Fix Linux wheel tag
+        if: runner.os == 'Linux'
+        run: |
+          pip install wheel
+          for f in dist/*-linux_*.whl; do
+            python -m wheel tags --platform-tag manylinux_2_28_x86_64 --remove "$f"
+          done
+
       - name: Test
         run: |
           pip install dist/*.whl
