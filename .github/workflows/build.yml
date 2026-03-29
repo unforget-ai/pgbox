@@ -5,6 +5,9 @@ on:
     tags: ['v*']
   workflow_dispatch:
 
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 jobs:
   build:
     strategy:
@@ -14,7 +17,7 @@ jobs:
             arch: x86_64
           - os: macos-14
             arch: arm64
-          - os: macos-13
+          - os: macos-15
             arch: x86_64
 
     runs-on: ${{ matrix.os }}
@@ -63,6 +66,8 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     if: startsWith(github.ref, 'refs/tags/v')
+    permissions:
+      id-token: write
 
     steps:
       - uses: actions/download-artifact@v4
@@ -72,5 +77,3 @@ jobs:
 
       - name: Publish to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
-        with:
-          password: ${{ secrets.PYPI_API_TOKEN }}
