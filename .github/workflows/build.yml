@@ -47,7 +47,7 @@ jobs:
 
       - name: Build wheel
         run: |
-          pip install build
+          pip install build setuptools wheel
           python -m build --wheel
 
       - name: Test
