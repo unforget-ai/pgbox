@@ -1,0 +1,20 @@
+# Build artifacts
+pgbuild/postgresql-*
+pgbuild/pgvector-*
+pgbuild/*.tar.*
+src/pgbox/pginstall/
+
+# Python
+__pycache__/
+*.pyc
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
